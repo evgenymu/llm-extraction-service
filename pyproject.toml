@@ -1,0 +1,14 @@
+[project]
+name = "llm-extraction-service"
+version = "0.1.0"
+description = "Turn unstructured text into validated, structured JSON with a language model."
+readme = "README.md"
+authors = [
+    { name = "Eugene Murzo", email = "murzoeugene@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = []
+
+[build-system]
+requires = ["uv_build>=0.12.10,<0.13.0"]
+build-backend = "uv_build"
