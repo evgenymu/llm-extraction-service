@@ -7,8 +7,33 @@ authors = [
     { name = "Eugene Murzo", email = "murzoeugene@gmail.com" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "fastapi>=0.141.1",
+    "uvicorn[standard]>=0.52.4",
+]
 
 [build-system]
 requires = ["uv_build>=0.12.10,<0.13.0"]
 build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "httpx2>=2.12.0",
+    "pytest>=9.1.1",
+    "ruff>=0.16.6",
+]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+# E,W  pycodestyle  - layout
+# F    pyflakes     - real defects: unused imports, undefined names
+# I    isort        - import ordering
+# UP   pyupgrade    - syntax superseded on our Python version
+# B    bugbear      - common traps, e.g. mutable default arguments
+# SIM  simplify     - needless complexity
+select = ["E", "W", "F", "I", "UP", "B", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
