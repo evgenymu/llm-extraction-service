@@ -7,7 +7,7 @@ from pydantic import BaseModel
 
 SERVICE_VERSION = version("llm-extraction-service")
 
-app = FastAPI(
+application = FastAPI(
     title="LLM Extraction Service",
     description="Turn unstructured text into validated, structured JSON.",
     version=SERVICE_VERSION,
