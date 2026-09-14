@@ -1,5 +1,5 @@
 """HTTP entry point for the extraction service."""
-
+import os,sys
 from importlib.metadata import version
 
 from fastapi import FastAPI
