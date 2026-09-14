@@ -1,5 +1,7 @@
 # LLM Extraction Service
 
+[![CI](https://github.com/evgenymu/llm-extraction-service/actions/workflows/ci.yml/badge.svg)](https://github.com/evgenymu/llm-extraction-service/actions/workflows/ci.yml)
+
 An HTTP service that turns unstructured text into validated, structured JSON
 using a language model.
 
