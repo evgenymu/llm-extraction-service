@@ -9,10 +9,10 @@ Two conventions hold for every field:
 - Nothing is inferred. If the posting does not say it, the answer is empty.
   A guessed salary is worse than no salary.
 
-Field descriptions document the API; they do not instruct the model. Ollama
-turns the JSON schema into a decoding grammar that ignores descriptions
-(verified: identical output with and without them at temperature 0). Any rule
-the model must follow has to be stated in the prompt.
+Field descriptions reach the model only through the prompt, which
+``extractor.build_prompt`` renders from them. Ollama turns the JSON schema into
+a decoding grammar that ignores descriptions (verified: identical output with
+and without them at temperature 0).
 """
 
 from enum import StrEnum
@@ -47,18 +47,20 @@ class Salary(BaseModel):
     min: int | None = Field(description="Lower bound as a whole number.")
     max: int | None = Field(description="Upper bound; equal to min for a single figure.")
     currency: str | None = Field(description="ISO 4217 code, for example PLN, EUR, USD.")
-    period: SalaryPeriod | None
+    period: SalaryPeriod | None = Field(description="What the amount is paid per.")
 
 
 class JobPosting(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
-    title: str | None
-    company: str | None
+    title: str | None = Field(description="Job title as stated. Null if no title is given.")
+    company: str | None = Field(
+        description="Name of the hiring company. Null if the text does not name one."
+    )
     location: str | None = Field(
         description="City and/or country only. Do not include the work arrangement."
     )
-    work_mode: WorkMode
+    work_mode: WorkMode = Field(description="remote, hybrid or onsite; unknown if not stated.")
     seniority: list[Seniority] = Field(
         description="Every level the posting targets, e.g. mid to senior. Empty when not stated."
     )
